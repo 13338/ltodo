@@ -7,25 +7,6 @@ use Illuminate\Http\Request;
 
 class SubTaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,29 +16,7 @@ class SubTaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\SubTask  $subTask
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SubTask $subTask)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\SubTask  $subTask
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SubTask $subTask)
-    {
-        //
+        return SubTask::create($request->all());
     }
 
     /**
@@ -69,7 +28,12 @@ class SubTaskController extends Controller
      */
     public function update(Request $request, SubTask $subTask)
     {
-        //
+        if ($request->done) {
+            $subTask->update([
+                'done' => ($subTask->done == 0) ? 1 : 0,
+            ]);
+            return $subTask;
+        }
     }
 
     /**
@@ -80,6 +44,9 @@ class SubTaskController extends Controller
      */
     public function destroy(SubTask $subTask)
     {
-        //
+        if ($subTask->delete()) {
+            return response(['message' => 'deleted'], 200);
+        }
+        return response(['message' => 'delete error'], 400);
     }
 }

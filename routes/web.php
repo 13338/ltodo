@@ -16,3 +16,4 @@ Route::get('/', 'TaskController@index')->name('home');
 Auth::routes();
 
 Route::resource('tasks', 'TaskController')->except(['create', 'edit']);
+Route::resource('subTasks', 'SubTaskController')->only(['store', 'update', 'destroy']);
