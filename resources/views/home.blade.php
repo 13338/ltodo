@@ -28,7 +28,7 @@
                                 <td>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customCheck{{ $task->id }}"{{ $task->done ? ' checked' : '' }}>
-                                        <label class="custom-control-label{{ $task->done ? ' text-muted' : ''}}" for="customCheck{{ $task->id }}" onclick="change(this)" data-id="{{ $task->id }}">{{ $task->title }}</label>
+                                        <label class="custom-control-label{{ $task->done ? ' text-muted' : ''}}" for="customCheck{{ $task->id }}" onclick="change(this)" data-url="/tasks/{{ $task->id }}">{{ $task->title }}</label>
                                         <span class="float-right">
                                             <a href="/tasks/{{ $task->id }}">{{ __('tasks.view') }}</a>
                                             <a href="#" onclick="destroy(this)" data-url="/tasks/{{ $task->id }}" class="text-danger ml-1">{{ __('tasks.delete') }}</a>

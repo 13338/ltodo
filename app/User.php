@@ -28,6 +28,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Get the tasks for the user.
+     */
     public function tasks()
     {
         return $this->hasMany('App\Task');

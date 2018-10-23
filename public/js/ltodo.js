@@ -16,7 +16,38 @@ function create() {
                         <a href="/tasks/${task.id}" class="float-right">View Task</a>
                         <span class="float-right">
                             <a href="/tasks/${task.id}">View Task</a>
-                            <a href="#" onclick="delete(this)" data-id="${task.id}" class="text-danger ml-1">Delete</a>
+                            <a href="#" onclick="destroy(this)" data-url="/tasks/${task.id}" class="text-danger ml-1">Delete</a>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        `);
+        title.removeClass('is-invalid');
+    })
+    .fail(function() {
+        title.addClass('is-invalid');
+    })
+    .always(function() {
+        title.val('');
+    });
+};
+// Create subtask
+function createSubTask() {
+    var title = $('#title');
+    $.ajax({
+        url: '/subTasks',
+        type: 'POST',
+        data: {title: title.val(), task_id: title.data('task')},
+    })
+    .done(function(subtask) {
+        $('#subtasks_list').append(`
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck${subtask.id}">
+                        <label class="custom-control-label" for="customCheck${subtask.id}" onclick="change(this)" data-url="/subTasks/${subtask.id}">${subtask.title}</label>
+                        <span class="float-right">
+                            <a href="#" onclick="destroy(this)" data-url="/subTasks/${subtask.id}" class="text-danger ml-1">Delete</a>
                         </span>
                     </div>
                 </td>
@@ -33,9 +64,8 @@ function create() {
 };
 // Make task done/undone
 function change(element) {
-    var id = $(element).data('id');
     $.ajax({
-        url: '/tasks/' + id,
+        url: $(element).data('url'),
         type: 'POST',
         data: {_method: 'PUT', done: 'change'},
     })
