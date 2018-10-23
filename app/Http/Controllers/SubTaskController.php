@@ -17,6 +17,7 @@ class SubTaskController extends Controller
      */
     public function store(SubTaskRequest $request)
     {
+        $this->authorize('create', SubTask::class);
         return SubTask::create($request->all());
     }
 
@@ -29,6 +30,7 @@ class SubTaskController extends Controller
      */
     public function update(SubTaskRequest $request, SubTask $subTask)
     {
+        $this->authorize('update', $subTask);
         if ($request->done) {
             $subTask->update([
                 'done' => ($subTask->done == 0) ? 1 : 0,
@@ -45,6 +47,7 @@ class SubTaskController extends Controller
      */
     public function destroy(SubTask $subTask)
     {
+        $this->authorize('forceDelete', $subTask);
         if ($subTask->delete()) {
             return response(['message' => 'deleted'], 200);
         }

@@ -22,6 +22,7 @@ function create() {
             </tr>
         `);
         title.removeClass('is-invalid');
+        $('.empty').hide();
     })
     .fail(function() {
         title.addClass('is-invalid');
@@ -30,6 +31,16 @@ function create() {
         title.val('');
     });
 };
+// Create task Enter
+var cTask = document.getElementById('create');
+if (cTask) {
+    cTask.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            create();
+        }
+    });
+}
 // Create subtask
 function createSubTask() {
     var title = $('#title');
@@ -53,6 +64,7 @@ function createSubTask() {
             </tr>
         `);
         title.removeClass('is-invalid');
+        $('.empty').hide();
     })
     .fail(function() {
         title.addClass('is-invalid');
@@ -61,6 +73,16 @@ function createSubTask() {
         title.val('');
     });
 };
+// Create subtask Enter
+var cSubTask = document.getElementById('createSubTask');
+if (cSubTask) {
+    cSubTask.addEventListener('keyup', function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            createSubTask();
+        }
+    });
+}
 // Make task done/undone
 function change(element) {
     $.ajax({

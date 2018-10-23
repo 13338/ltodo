@@ -27,7 +27,7 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr>
+                            <tr class="empty">
                                 <td colspan="1" class="text-center text-muted">{{ __('tasks.notask') }}</td>
                             </tr>
                             @endforelse
@@ -35,8 +35,8 @@
                     </table>
                     <form action="{{ route('tasks.store') }}" method="post">
                         @csrf
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="title" data-task="{{ $task->id }}" placeholder="{{ __('tasks.addtask') }}" autofocus="autofocus" id="title">
+                        <div class="input-group mb-3" id="createSubTask">
+                            <input type="text" class="form-control" name="title" data-task="{{ $task->id }}" placeholder="{{ __('tasks.addtask') }}" autofocus="autofocus" id="title" onkeypress="return event.keyCode != 13;">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="button" onclick="createSubTask()">{{ __('tasks.add') }}</button>
                             </div>
