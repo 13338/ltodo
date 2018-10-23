@@ -23,6 +23,7 @@ function create() {
             </tr>
         `);
         title.removeClass('is-invalid');
+        $('.empty').hide();
     })
     .fail(function() {
         title.addClass('is-invalid');
@@ -64,6 +65,7 @@ function createSubTask() {
             </tr>
         `);
         title.removeClass('is-invalid');
+        $('.empty').hide();
     })
     .fail(function() {
         title.addClass('is-invalid');

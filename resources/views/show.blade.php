@@ -27,7 +27,7 @@
                                 </td>
                             </tr>
                             @empty
-                            <tr>
+                            <tr class="empty">
                                 <td colspan="1" class="text-center text-muted">{{ __('tasks.notask') }}</td>
                             </tr>
                             @endforelse
