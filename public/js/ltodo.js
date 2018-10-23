@@ -13,7 +13,6 @@ function create() {
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="customCheck${task.id}">
                         <label class="custom-control-label" for="customCheck${task.id}" onclick="change(this)" data-id="${task.id}">${task.title}</label>
-                        <a href="/tasks/${task.id}" class="float-right">View Task</a>
                         <span class="float-right">
                             <a href="/tasks/${task.id}">View Task</a>
                             <a href="#" onclick="destroy(this)" data-url="/tasks/${task.id}" class="text-danger ml-1">Delete</a>
