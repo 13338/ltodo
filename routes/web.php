@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', 'TaskController@index')->name('home');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::resource('tasks', 'TaskController')->except(['create', 'edit']);
-Route::resource('subTasks', 'SubTaskController')->only(['store', 'update', 'destroy']);
+Route::group(['middleware' => 'verified'], function() {
+    Route::get('/', 'TaskController@index')->name('home');
+    Route::resource('tasks', 'TaskController')->except(['create', 'edit']);
+    Route::resource('subTasks', 'SubTaskController')->only(['store', 'update', 'destroy']);
+});
