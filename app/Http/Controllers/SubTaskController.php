@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\SubTask;
+use App\Http\Requests\SubTaskRequest;
 use Illuminate\Http\Request;
 
 class SubTaskController extends Controller
@@ -14,7 +15,7 @@ class SubTaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubTaskRequest $request)
     {
         return SubTask::create($request->all());
     }
@@ -26,7 +27,7 @@ class SubTaskController extends Controller
      * @param  \App\SubTask  $subTask
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubTask $subTask)
+    public function update(SubTaskRequest $request, SubTask $subTask)
     {
         if ($request->done) {
             $subTask->update([
