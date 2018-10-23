@@ -25,6 +25,10 @@ class Task extends Model
 
         $model->save();
 
+        $model->slug = $model->id . '-' . str_slug($model->title);
+
+        $model->save();
+        
         return $model;
     }
 
