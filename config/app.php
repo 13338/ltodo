@@ -150,7 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -186,6 +186,7 @@ return [
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,
+        'DotenvEditor' => Jackiedo\DotenvEditor\Facades\DotenvEditor::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
