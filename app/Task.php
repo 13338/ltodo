@@ -28,8 +28,19 @@ class Task extends Model
         return $model;
     }
 
+    /**
+     * Get the user that owns the task.
+     */
     public function user()
     {
-    	return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the subtasks for the task.
+     */
+    public function subTasks()
+    {
+        return $this->hasMany('App\SubTask');
     }
 }
