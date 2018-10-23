@@ -24,7 +24,7 @@ class SubTaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
+            'title' => 'min:1|max:255',
         ];
     }
 }
