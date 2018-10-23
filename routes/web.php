@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'TaskController@index')->name('home');
 
 Auth::routes();
 
-Route::resource('tasks', 'TaskController');
+Route::resource('tasks', 'TaskController')->except(['create', 'edit']);

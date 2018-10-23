@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -14,17 +15,11 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $tasks = Task::where('user_id', Auth::id())
+            ->orderBy('done')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('home', compact(['tasks']));
     }
 
     /**
@@ -35,7 +30,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Task::create($request->all());
     }
 
     /**
@@ -46,18 +41,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $task)
-    {
-        //
+        return view('show', compact(['task']));
     }
 
     /**
@@ -69,7 +53,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        if ($request->done) {
+            $task->update([
+                'done' => ($task->done == 0) ? 1 : 0,
+            ]);
+            return $task;
+        }
     }
 
     /**
@@ -80,6 +69,9 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        if ($task->delete()) {
+            return response(['message' => 'deleted'], 200);
+        }
+        return response(['message' => 'delete error'], 400);
     }
 }
