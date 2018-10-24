@@ -32,6 +32,16 @@ class Task extends Model
         return $model;
     }
 
+    public function delete()
+    {
+        foreach($this->subTasks as $subTask)
+        {
+            $subTask->delete();
+        }
+        
+        return parent::delete();
+    }
+
     /**
      * Get the user that owns the task.
      */
